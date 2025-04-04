@@ -1,5 +1,7 @@
 
 - Front-end
+  - cors
+  - jwt
 - Back-end
   - prompt pro modelo de IA.
   - modelar o banco de dados
