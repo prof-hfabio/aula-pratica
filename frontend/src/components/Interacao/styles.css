@@ -1,0 +1,61 @@
+:root {
+  --balao-user: red;
+  --balao-ai: blue;
+}
+section.interacao {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+div.historico {
+  height: 80%;
+  margin: 24px;
+  border: 2px solid white;
+  border-radius: 24px;
+  padding: 8px 24px;
+}
+div.historico > div.row {
+  width: 100%;
+}
+div.historico > div.row > span {
+  display: inline-block;
+  position: relative;
+  padding: 8px;
+  border-radius: 24px;
+}
+
+div.historico > div.row > span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 16px 0 0 16px;
+  border-color: transparent transparent transparent #FF4532;
+  transform: rotate(0deg);
+}
+
+div.historico > div.row > span.user {
+  float: right;
+  background-color: var(--balao-user);
+}
+
+div.historico > div.row > span.user::after {
+  border-color: transparent transparent transparent var(--balao-user);
+}
+
+div.historico > div.row > span.ai {
+  float: left;
+  background-color: var(--balao-ai);
+}
+div.historico > div.row > span.ai::after {
+  border-color: transparent transparent transparent var(--balao-ai);
+}
+
+div {
+  height: 20%;
+}
