@@ -21,9 +21,11 @@ section.interacao > div.historico {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  gap: 8px;
 }
 section.interacao > div.historico > div.historico > div.row {
   width: 100%;
+
 }
 div.historico > div.row > span {
   display: inline-block;
@@ -55,11 +57,11 @@ div.historico > div.row > span.user::after {
   border-color: transparent transparent transparent var(--balao-user);
 }
 
-div.historico > div.row > span.ai {
+div.historico > div.row > span.assistant {
   float: left;
   background-color: var(--balao-ai);
 }
-div.historico > div.row > span.ai::after {
+div.historico > div.row > span.assistant::after {
   border-color: transparent transparent transparent var(--balao-ai);
 }
 

@@ -7,8 +7,8 @@ export default function Interacao() {
   /**
    * historico
    * {
-   * role: 'user' | 'ai'
-   * message: text
+   * role: 'user' | 'assistant'
+   * content: text
    * }
    */
   const [historico, setHistorico] = useState([]);
@@ -19,21 +19,21 @@ export default function Interacao() {
 
   const makePrompt = async () => {
     if (!inputText.length) return alert('ei, o texto ta vazio, preencha!');
-    setHistorico(prevState => ([
-      ...prevState,
-      {role: 'user', message: inputText}
-    ]));
     const response = await fetch('http://localhost:3000', {
       method: 'POST',
       headers: {
         "Content-Type": 'application/json'
       },
-      body: JSON.stringify({prompt: inputText})
+      body: JSON.stringify({
+        prompt: inputText,
+        history: historico
+      })
     })
       .then((result) => result.json());
     setHistorico(prevState => ([
       ...prevState,
-      {role: 'ai', message: response.text}
+      {role: 'user', content: inputText},
+      {role: 'assistant', content: response.text}
     ]))
       setInputText('');
   }
@@ -43,7 +43,12 @@ export default function Interacao() {
       <div className='historico'>
         {/* histórico de chat */}
         {historico.map((history) => (<div className='row'>
-          <span className={history.role} >{history.message}</span>
+          <span className={history.role} dangerouslySetInnerHTML={{
+            __html: history.content
+              .replace(/(?:\r\n|\r|\n)/g, '<br>')
+              .replace(/(?:\*\*(.*?)\*\*)/g, '<strong>$1</strong>')
+              .replace(/(?:\*(.*?)\*)/g, '<em>$1</em>')
+            }}></span>
         </div>))}
       </div>
       <div className='input'>
